@@ -3,7 +3,11 @@
 namespace App\Repositories;
 
 use App\Models\Basket;
+use App\Models\Product;
 use App\Repositories\BaseRepository;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 /**
  * Class BasketRepository
@@ -38,4 +42,59 @@ class BasketRepository extends BaseRepository
     {
         return Basket::class;
     }
+
+    public function all($search = [], $skip = null, $limit = null, $columns = ['*'])
+    {
+        if(auth()->guard('api')->user())
+
+        {
+            $user = JWTAuth::parseToken()->authenticate();
+
+            $productId_count = DB::select('SELECT  product_id , COUNT(*) AS counter FROM  baskets where user_id ='. $user->id .' GROUP BY product_id ORDER BY counter desc' );
+
+            return $productId_count;
+
+        }
+
+        return 'You need to login ';
+    }
+
+
+    public function create($input)
+    {
+
+        if(auth()->guard('api')->user()) {
+            $product = Product::find($input['product_id']);
+            if(!$product)
+            {
+                return  'wrong Id';
+            }
+            $user = JWTAuth::parseToken()->authenticate();
+            $input['user_id'] = $user->id;
+            $user->Basket()->attach($product);
+
+            return $product;
+        }
+
+        $model = $this->model->newInstance($input);
+
+        $model->save();
+
+        return $model;
+    } // end of create
+
+
+    public function totalPrice()
+    {
+        if(auth()->guard('api')->user()) {
+
+            $user = JWTAuth::parseToken()->authenticate();
+
+            return $user->Basket()->sum('regular_price');
+
+        }
+    }
+
+
+
 }

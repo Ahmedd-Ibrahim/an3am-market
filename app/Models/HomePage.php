@@ -14,12 +14,11 @@ class HomePage extends Model
 {
 
     public $table = 'home_pages';
-    
 
 
 
     public $fillable = [
-        
+
     ];
 
     /**
@@ -37,8 +36,8 @@ class HomePage extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
 
-    
+
 }

@@ -50,7 +50,11 @@
 <li class="{{ Request::is('*settings*') ? 'active' : '' }}">
     <a href="{{ route('settings.index') }}"><i class="fa fa-edit"></i><span>Settings</span></a>
 </li>
-<li class="{{ Request::is('homePages*') ? 'active' : '' }}">
-    <a href="{{ route('homePages.index') }}"><i class="fa fa-edit"></i><span>Home Pages</span></a>
+{{--<li class="{{ Request::is('homePages*') ? 'active' : '' }}">--}}
+{{--    <a href="{{ route('homePages.index') }}"><i class="fa fa-edit"></i><span>Home Pages</span></a>--}}
+{{--</li>--}}
+
+<li class="{{ Request::is('messages*') ? 'active' : '' }}">
+    <a href="{{ route('messages.index') }}"><i class="fa fa-edit"></i><span>Messages</span></a>
 </li>
 

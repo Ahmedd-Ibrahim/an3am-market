@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\API\CreateBasketAPIRequest;
 use App\Http\Requests\API\UpdateBasketAPIRequest;
+use App\Http\Resources\BasketResource;
 use App\Models\Basket;
 use App\Repositories\BasketRepository;
 use Illuminate\Http\Request;
@@ -40,7 +41,7 @@ class BasketAPIController extends AppBaseController
             $request->get('limit')
         );
 
-        return $this->sendResponse($baskets->toArray(), 'Baskets retrieved successfully');
+        return $this->sendResponse(BasketResource::collection($baskets), 'Baskets retrieved successfully');
     }
 
     /**
@@ -127,5 +128,17 @@ class BasketAPIController extends AppBaseController
         $basket->delete();
 
         return $this->sendSuccess('Basket deleted successfully');
+    }
+
+    public function totalPrice()
+    {
+        $total = $this->basketRepository->totalPrice();
+
+        if(!$total)
+        {
+            return $this->sendResponse(0, 'Basket price retrieved successfully');
+        }
+        return $this->sendResponse($total, 'Basket price retrieved successfully');
+
     }
 }

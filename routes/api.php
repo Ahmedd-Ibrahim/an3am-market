@@ -61,8 +61,9 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::group(['prefix'=>'settings'],function (){
 
         Route::post('update-password','UserAPIController@updatePassword');
-
         Route::get('about', 'SettingsAPIController@about');
+        Route::get('condition', 'SettingsAPIController@condition');
+        Route::get('privacy', 'SettingsAPIController@privacy');
 
     });
 
@@ -73,6 +74,8 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::resource('favourite', 'ProductUserAPIController')->except(['show','update']);
 
     Route::resource('baskets', 'BasketAPIController');
+
+    Route::get('totalPrice/basket', 'BasketAPIController@totalPrice');
 
     Route::resource('addresses', 'AddressAPIController');
 
@@ -87,6 +90,8 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::resource('sliders', 'SliderAPIController');
 
     Route::resource('settings', 'SettingsAPIController');
+
+    Route::resource('messages', 'MessageAPIController');
 
 });
 

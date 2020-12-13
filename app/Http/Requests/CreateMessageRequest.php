@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Basket;
+use App\Models\Message;
 
-class CreateBasketRequest extends FormRequest
+class CreateMessageRequest extends FormRequest
 {
 
     /**
@@ -25,8 +25,6 @@ class CreateBasketRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = Basket::$rules;
-        $rules['user_id'] = 'required';
-        return $rules;
+        return Message::$rules;
     }
 }

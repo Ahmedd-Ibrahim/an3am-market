@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\API;
 
-use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Basket;
+use App\Models\Message;
+use InfyOm\Generator\Request\APIRequest;
 
-class CreateBasketRequest extends FormRequest
+class CreateMessageAPIRequest extends APIRequest
 {
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -25,8 +24,6 @@ class CreateBasketRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = Basket::$rules;
-        $rules['user_id'] = 'required';
-        return $rules;
+        return Message::$rules;
     }
 }

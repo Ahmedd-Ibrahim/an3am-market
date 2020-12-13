@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\API\CreateSettingsAPIRequest;
 use App\Http\Requests\API\UpdateSettingsAPIRequest;
 use App\Http\Resources\aboutResource;
+use App\Http\Resources\ConidationResource;
+use App\Http\Resources\PrivacyResource;
 use App\Models\Settings;
 use App\Repositories\SettingsRepository;
 use Illuminate\Http\Request;
@@ -134,7 +136,19 @@ class SettingsAPIController extends AppBaseController
     {
         $about = Settings::first();
 
-        return $this->sendResponse(new aboutResource($about), 'Settings updated successfully');
+        return $this->sendResponse(new aboutResource($about), 'Settings retrieved successfully');
 
     } // End of about
+
+    public function condition()
+    {
+        $about = Settings::first();
+        return $this->sendResponse(new ConidationResource($about), 'condition retrieved successfully');
+    }
+
+    public function privacy()
+    {
+        $about = Settings::first();
+        return $this->sendResponse(new PrivacyResource($about), 'condition retrieved successfully');
+    }
 }

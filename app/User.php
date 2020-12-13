@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\Address;
+use App\Models\Message;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Store;
@@ -71,6 +72,11 @@ class User extends Authenticatable implements JWTSubject
     public function Orders()
     {
         return $this->hasMany(Order::class,'user_id');
+    }
+
+    public function Messages()
+    {
+        return $this->hasMany(Message::class,'user');
     }
     /* End Relation  */
 

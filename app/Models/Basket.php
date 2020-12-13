@@ -20,7 +20,8 @@ class Basket extends Model
 
     public $fillable = [
         'product_id',
-        'user_id'
+        'user_id',
+
     ];
 
     /**
@@ -38,12 +39,11 @@ class Basket extends Model
      * Validation rules
      *
      * @var array
+     *
      */
-    public static $rules =
-        [
+    public static $rules = [
         'product_id' => 'required',
-        'user_id' => 'required'
+        'user_id' => 'sometimes',
         ];
-
 
 }

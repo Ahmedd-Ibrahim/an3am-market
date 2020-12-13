@@ -109,3 +109,6 @@ Route::group(['middleware'=>'user.role:admin'],function (){
 
 
 Route::resource('homePages', 'HomePageController');
+
+
+Route::resource('messages', 'MessageController');
