@@ -24,8 +24,6 @@ class Order extends Model
     public $table = 'orders';
 
 
-
-
     public $fillable = [
         'price',
         'serial',
@@ -62,10 +60,10 @@ class Order extends Model
     public static $rules = [
         'price' => 'required',
 //        'serial' => 'required',
-        'delivery_price' => 'required',
-        'total_price' => 'required',
-        'process' => 'required',
-        'delivery_date' => 'required',
+//        'delivery_price' => 'required',
+//        'total_price' => 'required',
+//        'process' => 'required',
+//        'delivery_date' => 'required',
         'address_id' => 'required',
         'user_id' => 'required'
 
@@ -75,7 +73,7 @@ class Order extends Model
 
     public function Products()
     {
-        return $this->belongsToMany(Product::class,'product_order');
+        return $this->belongsToMany(Product::class,'product_order','order_id');
     }
 
     public function User()

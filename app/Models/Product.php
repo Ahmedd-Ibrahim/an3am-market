@@ -69,7 +69,7 @@ class Product extends Model
         'name' => 'required',
         'image'=> 'sometimes',
         'desc' => 'required',
-        'age' => 'required',
+        'age' => 'required|integer',
         'sale_price' => 'required',
         'feature' => 'required',
         'stock' => 'required',
@@ -98,7 +98,7 @@ class Product extends Model
 
     public function Orders()
     {
-        return $this->belongsToMany(Order::class,'product_order');
+        return $this->belongsToMany(Order::class,'product_order','product_id');
     }
 
     public function Categories()

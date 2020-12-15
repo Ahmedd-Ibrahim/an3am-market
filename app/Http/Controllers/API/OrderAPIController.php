@@ -5,10 +5,12 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\API\CreateOrderAPIRequest;
 use App\Http\Requests\API\UpdateOrderAPIRequest;
 use App\Models\Order;
+use App\Repositories\OrderProcessRepositoryRepository;
 use App\Repositories\OrderRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 /**
  * Class OrderController
@@ -18,11 +20,12 @@ use Response;
 class OrderAPIController extends AppBaseController
 {
     /** @var  OrderRepository */
-    private $orderRepository;
+    private $orderRepository,$processRepo;
 
-    public function __construct(OrderRepository $orderRepo)
+    public function __construct(OrderRepository $orderRepo,OrderProcessRepositoryRepository $process)
     {
         $this->orderRepository = $orderRepo;
+        $this->processRepo = $process;
     }
 
     /**
@@ -40,7 +43,13 @@ class OrderAPIController extends AppBaseController
             $request->get('limit')
         );
 
-        return $this->sendResponse($orders->toArray(), 'Orders retrieved successfully');
+        if($orders == null)
+        {
+            return $this->sendError('No orders');
+        }
+
+
+        return $this->sendResponse($orders, 'Orders retrieved successfully');
     }
 
     /**
@@ -57,7 +66,7 @@ class OrderAPIController extends AppBaseController
 
         $order = $this->orderRepository->create($input);
 
-        return $this->sendResponse($order->toArray(), 'Order saved successfully');
+        return $this->sendResponse($order, 'Order saved successfully');
     }
 
     /**
@@ -127,5 +136,35 @@ class OrderAPIController extends AppBaseController
         $order->delete();
 
         return $this->sendSuccess('Order deleted successfully');
+    }
+
+    public function history()
+    {
+        $history = $this->orderRepository->history();
+
+        if($history == null)
+        {
+            return $this->sendError('No orders');
+        }
+
+        return $this->sendResponse($history, 'Orders retrieved successfully');
+
+    }// end of history
+
+    public function newOrder()
+    {
+        $process = $this->processRepo->StartNewOrder();
+
+        if($process == 'check basket')
+        {
+            return $this->sendError('basket is empty');
+        }
+
+        if ($process == 'order Added')
+        {
+            return $this->sendSuccess( 'Orders Added successfully');
+        }
+
+
     }
 }

@@ -87,7 +87,8 @@ abstract class BaseRepository
     {
         $query = $this->model->newQuery();
 
-        if (count($search)) {
+        if (count($search))
+        {
             foreach($search as $key => $value) {
                 if (in_array($key, $this->getFieldsSearchable())) {
                     $query->where($key, $value);
@@ -99,7 +100,8 @@ abstract class BaseRepository
             $query->skip($skip);
         }
 
-        if (!is_null($limit)) {
+        if (!is_null($limit))
+        {
             $query->limit($limit);
         }
 

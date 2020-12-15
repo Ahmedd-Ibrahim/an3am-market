@@ -18,10 +18,10 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->float('price');
             $table->string('serial');
-            $table->float('delivery_price');
-            $table->float('total_price');
+            $table->float('delivery_price')->nullable();
+            $table->float('total_price')->nullable();
             $table->enum('process', ['prepare','delivery','done']);
-            $table->date('delivery_date');
+            $table->date('delivery_date')->nullable();
             $table->integer('address_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->timestamps();

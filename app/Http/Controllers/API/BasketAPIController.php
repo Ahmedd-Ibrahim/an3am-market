@@ -58,7 +58,11 @@ class BasketAPIController extends AppBaseController
 
         $basket = $this->basketRepository->create($input);
 
-        return $this->sendResponse($basket->toArray(), 'Basket saved successfully');
+        if (empty($basket)) {
+            return $this->sendError('Out of stock');
+        }
+
+        return $this->sendResponse($basket, 'Basket saved successfully');
     }
 
     /**
@@ -139,6 +143,14 @@ class BasketAPIController extends AppBaseController
             return $this->sendResponse(0, 'Basket price retrieved successfully');
         }
         return $this->sendResponse($total, 'Basket price retrieved successfully');
+
+    }
+
+    public function testClear()
+    {
+        $clear = $this->basketRepository->clearBasket();
+
+        return $this->sendResponse($clear, 'Basket Deleted successfully');
 
     }
 }

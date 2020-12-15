@@ -62,7 +62,6 @@ class BasketRepository extends BaseRepository
 
     public function create($input)
     {
-
         if(auth()->guard('api')->user()) {
             $product = Product::find($input['product_id']);
             if(!$product)
@@ -71,9 +70,20 @@ class BasketRepository extends BaseRepository
             }
             $user = JWTAuth::parseToken()->authenticate();
             $input['user_id'] = $user->id;
-            $user->Basket()->attach($product);
 
-            return $product;
+            $sameProductInBasket = $user->Basket()->where('product_id','=',$product->id)->get();
+            if($sameProductInBasket)
+            {
+                if($product->stock > count($sameProductInBasket))
+                {
+
+                    $user->Basket()->attach($product);
+                }else{
+                    return $message = '';
+                }
+            }
+
+            return $message = 'Added To sock';
         }
 
         $model = $this->model->newInstance($input);
@@ -95,6 +105,15 @@ class BasketRepository extends BaseRepository
         }
     }
 
+    public function clearBasket()
+    {
+        if(auth()->guard('api')->user()) {
 
+            $user = JWTAuth::parseToken()->authenticate();
+
+            $user->Basket()->wherePivot('user_id','=',$user->id)->detach();
+             return 'done';
+        }
+    }
 
 }

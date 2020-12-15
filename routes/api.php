@@ -64,7 +64,6 @@ Route::group(['middleware' => ['jwt.verify']], function() {
         Route::get('about', 'SettingsAPIController@about');
         Route::get('condition', 'SettingsAPIController@condition');
         Route::get('privacy', 'SettingsAPIController@privacy');
-
     });
 
     Route::resource('products', 'ProductAPIController');
@@ -74,12 +73,15 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::resource('favourite', 'ProductUserAPIController')->except(['show','update']);
 
     Route::resource('baskets', 'BasketAPIController');
+    Route::get('baskets-clear', 'BasketAPIController@testClear');
 
     Route::get('totalPrice/basket', 'BasketAPIController@totalPrice');
 
     Route::resource('addresses', 'AddressAPIController');
 
     Route::resource('orders', 'OrderAPIController');
+    Route::get('orders-history', 'OrderAPIController@history');
+    Route::get('orders-new', 'OrderAPIController@newOrder');
 
     Route::resource('product_orders', 'ProductOrderAPIController');
 
