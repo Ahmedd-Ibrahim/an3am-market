@@ -24,6 +24,8 @@ class CreateMessageAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return Message::$rules;
+        $rules = Message::$rules;
+        $rules['user'] = 'sometimes';
+        return $rules;
     }
 }

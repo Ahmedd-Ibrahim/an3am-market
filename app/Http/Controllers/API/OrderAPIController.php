@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Requests\API\CreateOrderAPIRequest;
+use App\Http\Requests\API\orderProcessRequest;
 use App\Http\Requests\API\UpdateOrderAPIRequest;
+use App\Models\Address;
 use App\Models\Order;
 use App\Repositories\OrderProcessRepositoryRepository;
 use App\Repositories\OrderRepository;
@@ -151,9 +153,15 @@ class OrderAPIController extends AppBaseController
 
     }// end of history
 
-    public function newOrder()
+    public function newOrder(orderProcessRequest $request)
     {
-        $process = $this->processRepo->StartNewOrder();
+
+        $address = Address::find($request->address_id);
+        if(!$address)
+        {
+            return $this->sendError('this address not exists');
+        }
+        $process = $this->processRepo->StartNewOrder($address);
 
         if($process == 'check basket')
         {

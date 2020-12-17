@@ -135,7 +135,6 @@ class BasketRepository extends BaseRepository
         }
     }
 
-
     public function reduce($id)
     {
         $product = Product::find($id);

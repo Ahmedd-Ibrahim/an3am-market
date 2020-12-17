@@ -40,7 +40,12 @@ class AddressAPIController extends AppBaseController
             $request->get('limit')
         );
 
-        return $this->sendResponse($addresses->toArray(), 'Addresses retrieved successfully');
+        if($addresses == null)
+        {
+            return $this->sendError('no address for this user');
+        }
+
+        return $this->sendResponse($addresses, 'Addresses retrieved successfully');
     }
 
     /**

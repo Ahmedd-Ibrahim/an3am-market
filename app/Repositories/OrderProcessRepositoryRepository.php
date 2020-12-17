@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Address;
 use App\Models\Order;
 use App\Models\OrderProccessRepository;
 use App\Models\Product;
@@ -68,7 +69,8 @@ class OrderProcessRepositoryRepository extends BaseRepository
         $errors = [],
         $order,
         $products=[],
-        $delivery_price
+        $delivery_price,
+        $address
 
 ;
 
@@ -103,7 +105,7 @@ class OrderProcessRepositoryRepository extends BaseRepository
             $ids[] = $product->product_id;
         }
         return $ids;
-    }
+    } // end of getProductsId
 
     /*
      * count of products for every id
@@ -125,13 +127,13 @@ class OrderProcessRepositoryRepository extends BaseRepository
         }
 
         return $data;
-    }
+    } // end of productCounterForEveryId
 
-    public function StartNewOrder()
+    public function StartNewOrder($address)
     {
 
         $products = $this->allDataOnBasket;
-
+         $this->address = $address->id;
         if(!$products)
         {
              $this->errors[] = 'no thing on the basket';
@@ -177,7 +179,7 @@ class OrderProcessRepositoryRepository extends BaseRepository
 
         return $this->products;
 
-    }
+    } // end of products
 
     public function makeOrder()
     {
@@ -187,16 +189,15 @@ class OrderProcessRepositoryRepository extends BaseRepository
                     'price' => $this->purePrice,
                     'serial' => rand(10000000,99999999),
                     'user_id' => 1,
-                    'address_id' =>2
-
+                    'address_id' => $this->address
                 ]);
 
-              return $this->sendError('');
+
              return $this->InsertProductsOnOrder($order);
         }
 
         return $this->errors;
-    }
+    } // end of makeOrder
 
     public function InsertProductsOnOrder($order)
     {
@@ -239,7 +240,7 @@ class OrderProcessRepositoryRepository extends BaseRepository
             $arr []= $productsFromDb->update(['stock'=>$newStock]);
         }
 
-    }
+    } // end of UpdateProductWithNewStock
 
     public function deliveryPrice()
     {
@@ -249,7 +250,6 @@ class OrderProcessRepositoryRepository extends BaseRepository
             return 0;
         }
         return $price->delivery_price;
-    }
-
+    } // end of delivery price
 
 }

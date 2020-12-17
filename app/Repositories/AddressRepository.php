@@ -41,6 +41,28 @@ class AddressRepository extends BaseRepository
         return Address::class;
     }
 
+    public function all($search = [], $skip = null, $limit = null, $columns = ['*'])
+    {
+
+        $user = Auth::guard('api')->user();
+        if($user)
+        {
+            $address = Address::where('user_id',$user->id)->get();
+            if (!$address || count($address) < 1)
+            {
+                return null;
+            }
+            return $address;
+        }
+
+
+        $query = $this->allQuery($search, $skip, $limit);
+
+        return $query->get($columns);
+
+
+    }
+
     public function create($input)
     {
         $user = Auth::guard('api')->user();

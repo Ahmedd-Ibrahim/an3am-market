@@ -55,7 +55,6 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     // profile
     Route::group(['prefix'=>'profile'],function (){
         Route::resource('users', 'UserAPIController');
-        Route::post('add-address', 'UserAPIController@addAddress');
 
     });
     Route::group(['prefix'=>'settings'],function (){
@@ -82,7 +81,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 
     Route::resource('orders', 'OrderAPIController');
     Route::get('orders-history', 'OrderAPIController@history');
-    Route::get('orders-new', 'OrderAPIController@newOrder');
+    Route::post('orders-new', 'OrderAPIController@newOrder');
 
     Route::resource('product_orders', 'ProductOrderAPIController');
 

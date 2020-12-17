@@ -25,7 +25,7 @@ class UpdateMessageAPIRequest extends APIRequest
     public function rules()
     {
         $rules = Message::$rules;
-        
+        $rules['user'] = 'sometimes';
         return $rules;
     }
 }
