@@ -165,6 +165,5 @@ class OrderAPIController extends AppBaseController
             return $this->sendSuccess( 'Orders Added successfully');
         }
 
-
-    }
+    } // End of new Order
 }

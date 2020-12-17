@@ -122,16 +122,15 @@ class BasketAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var Basket $basket */
-        $basket = $this->basketRepository->find($id);
+//        /** @var Basket $basket */
+        $basket = $this->basketRepository->delete($id);
 
-        if (empty($basket)) {
+        if ($basket != true)
+        {
             return $this->sendError('Basket not found');
         }
 
-        $basket->delete();
-
-        return $this->sendSuccess('Basket deleted successfully');
+        return $this->sendSuccess( 'This Product Deleted from Basket');
     }
 
     public function totalPrice()
@@ -151,6 +150,23 @@ class BasketAPIController extends AppBaseController
         $clear = $this->basketRepository->clearBasket();
 
         return $this->sendResponse($clear, 'Basket Deleted successfully');
+
+    }
+
+    public function reduceProduct($id)
+    {
+        $reduce = $this->basketRepository->reduce($id);
+
+        if ($reduce == 'not found')
+        {
+            $this->sendError('product not exists');
+        }
+        elseif ($reduce == 'success')
+        {
+            return $this->sendSuccess( 'product reduced successfully');
+        }
+
+         return   $this->sendError('can not reduce under one ');
 
     }
 }

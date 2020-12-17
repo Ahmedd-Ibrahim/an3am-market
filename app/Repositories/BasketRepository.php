@@ -115,5 +115,49 @@ class BasketRepository extends BaseRepository
              return 'done';
         }
     }
+    /*
+     * delete single product from basket
+     * */
+    public function delete($id)
+    {
+        $product = Product::find($id);
+        if(!$product)
+        {
+            return false;
+        }
+        if(auth()->guard('api')->user()) {
 
+            $user = JWTAuth::parseToken()->authenticate();
+
+            $user->Basket()->wherePivot('user_id','=',$user->id)->wherePivot('product_id','=',$product->id)->detach();
+
+            return true;
+        }
+    }
+
+
+    public function reduce($id)
+    {
+        $product = Product::find($id);
+        if(!$product)
+        {
+            return 'not found';
+        }
+        if(auth()->guard('api')->user()) {
+
+            $user = JWTAuth::parseToken()->authenticate();
+
+            $productOnPivot = $user->Basket()->wherePivot('user_id', '=', $user->id)->wherePivot('product_id', '=', $product->id);
+
+            if ($productOnPivot->count() == 1) {
+                return 1;
+            }
+            $basketsUser = DB::table('baskets')->where('user_id', $user->id)->get();
+            foreach ($basketsUser as $basket)
+            {
+                 DB::table('baskets')->where('id',$basket->id)->delete();
+                 return 'success';
+            }
+        }
+    }
 }

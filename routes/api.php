@@ -74,6 +74,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 
     Route::resource('baskets', 'BasketAPIController');
     Route::get('baskets-clear', 'BasketAPIController@testClear');
+    Route::get('baskets-reduce/{id}', 'BasketAPIController@reduceProduct');
 
     Route::get('totalPrice/basket', 'BasketAPIController@totalPrice');
 

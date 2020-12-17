@@ -97,15 +97,9 @@ class OrderRepository extends BaseRepository
         }
 
 
-
-//        $model = $this->model->newInstance($input);
-//
-//        $model->save();
-
-        $product = Product::find(1);
-        $model  = Order::find(2);
-
-        return $this->InsertProductsOnOrder($model);
+        $model = $this->model->newInstance($input);
+        $this->InsertProductsOnOrder($model);
+        $model->save();
 
         return $model;
 
@@ -135,6 +129,7 @@ class OrderRepository extends BaseRepository
 
     public function history()
     {
+
         if(auth()->guard('api')->user())
 
         {

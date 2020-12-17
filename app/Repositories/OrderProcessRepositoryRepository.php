@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Order;
 use App\Models\OrderProccessRepository;
 use App\Models\Product;
+use App\Models\Settings;
 use App\Repositories\BaseRepository;
 
 /**
@@ -66,11 +67,11 @@ class OrderProcessRepositoryRepository extends BaseRepository
         $purePricePlusDelivery,
         $errors = [],
         $order,
-        $products=[]
+        $products=[],
+        $delivery_price
 
 ;
 
-    public $delivery_price = 20;
 
     public function __construct(BasketRepository $basket)
     {
@@ -82,6 +83,7 @@ class OrderProcessRepositoryRepository extends BaseRepository
 
         $this->purePricePlusDelivery = ($this->purePrice + $this->delivery_price);
 
+        $this->delivery_price = $this->deliveryPrice();
     }
 
     /*
@@ -189,6 +191,7 @@ class OrderProcessRepositoryRepository extends BaseRepository
 
                 ]);
 
+              return $this->sendError('');
              return $this->InsertProductsOnOrder($order);
         }
 
@@ -237,6 +240,16 @@ class OrderProcessRepositoryRepository extends BaseRepository
         }
 
     }
-    
+
+    public function deliveryPrice()
+    {
+        $price = Settings::first();
+        if (!$price)
+        {
+            return 0;
+        }
+        return $price->delivery_price;
+    }
+
 
 }
