@@ -212,9 +212,9 @@ class UserAPIController extends AppBaseController
 
         if($user)
         {
-            $random = rand(1000,9999); // random code also send it to mail
+            $random = rand(1000,9999); // random code  to mail & update user verified code
             $user->update(['verified_code'=> $random]);
-            $this->SendCodeToMail($random,'asol@asol','hello@hello');
+            $this->SendCodeToMail($random,'asol@tec',$user->email);
 
             /* / send code to email*/
 

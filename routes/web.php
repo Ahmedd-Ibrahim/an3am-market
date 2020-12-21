@@ -54,7 +54,9 @@ Route::get('test',function (){
 
         Route::resource('settings', 'SettingsController');
 
+        Route::resource('homePages', 'HomePageController');
 
+        Route::resource('messages', 'MessageController');
     }); // End of Auth
 
 
@@ -89,9 +91,3 @@ Route::group(['middleware'=>'user.role:admin'],function (){
 }); // End of Infyom Routes
 
 
-
-
-Route::resource('homePages', 'HomePageController');
-
-
-Route::resource('messages', 'MessageController');

@@ -18,7 +18,10 @@ class MessageDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'messages.datatables_actions');
+        return $dataTable->addColumn('action', 'messages.datatables_actions')
+            ->editColumn('user',function ($message){
+                return $message->User->name;
+            });
     }
 
     /**

@@ -4,15 +4,15 @@
 {{--</li>--}}
 
 <li class="{{ Request::is('*users*') ? 'active' : '' }}">
-    <a href="{{ route('users.index') }}"><i class="fa fa-edit"></i><span>Users</span></a>
+    <a href="{{ route('users.index') }}"><i class="fa fa-edit"></i><span>@lang('menu.Users')</span></a>
 </li>
 
 <li class="{{ Request::is('*products*') ? 'active' : '' }}">
-    <a href="{{ route('products.index') }}"><i class="fa fa-edit"></i><span>Products</span></a>
+    <a href="{{ route('products.index') }}"><i class="fa fa-edit"></i><span>@lang('menu.Products')</span></a>
 </li>
 
 <li class="{{ Request::is('*types*') ? 'active' : '' }}">
-    <a href="{{ route('types.index') }}"><i class="fa fa-edit"></i><span>Types</span></a>
+    <a href="{{ route('types.index') }}"><i class="fa fa-edit"></i><span>@lang('menu.Types')</span></a>
 </li>
 
 {{--<li class="{{ Request::is('productUsers*') ? 'active' : '' }}">--}}
@@ -24,11 +24,11 @@
 </li>
 
 <li class="{{ Request::is('*addresses*') ? 'active' : '' }}">
-    <a href="{{ route('addresses.index') }}"><i class="fa fa-edit"></i><span>Addresses</span></a>
+    <a href="{{ route('addresses.index') }}"><i class="fa fa-edit"></i><span>@lang('menu.Addresses')</span></a>
 </li>
 
 <li class="{{ Request::is('*orders*') ? 'active' : '' }}">
-    <a href="{{ route('orders.index') }}"><i class="fa fa-edit"></i><span>Orders</span></a>
+    <a href="{{ route('orders.index') }}"><i class="fa fa-edit"></i><span>@lang('menu.Orders')</span></a>
 </li>
 
 <li class="{{ Request::is('*productOrders*') ? 'active' : '' }}">
@@ -36,7 +36,7 @@
 </li>
 
 <li class="{{ Request::is('*categories*') ? 'active' : '' }}">
-    <a href="{{ route('categories.index') }}"><i class="fa fa-edit"></i><span>Categories</span></a>
+    <a href="{{ route('categories.index') }}"><i class="fa fa-edit"></i><span>@lang('menu.Categories')</span></a>
 </li>
 
 {{--<li class="{{ Request::is('categoryProducts*') ? 'active' : '' }}">--}}
@@ -44,17 +44,16 @@
 {{--</li>--}}
 
 <li class="{{ Request::is('*sliders*') ? 'active' : '' }}">
-    <a href="{{ route('sliders.index') }}"><i class="fa fa-edit"></i><span>Sliders</span></a>
+    <a href="{{ route('sliders.index') }}"><i class="fa fa-edit"></i><span>@lang('menu.Sliders')</span></a>
 </li>
 
 <li class="{{ Request::is('*settings*') ? 'active' : '' }}">
-    <a href="{{ route('settings.index') }}"><i class="fa fa-edit"></i><span>Settings</span></a>
+    <a href="{{ route('settings.index') }}"><i class="fa fa-edit"></i><span>@lang('menu.Settings')</span></a>
 </li>
 {{--<li class="{{ Request::is('homePages*') ? 'active' : '' }}">--}}
 {{--    <a href="{{ route('homePages.index') }}"><i class="fa fa-edit"></i><span>Home Pages</span></a>--}}
 {{--</li>--}}
 
 <li class="{{ Request::is('messages*') ? 'active' : '' }}">
-    <a href="{{ route('messages.index') }}"><i class="fa fa-edit"></i><span>Messages</span></a>
+    <a href="{{ route('messages.index') }}"><i class="fa fa-edit"></i><span>@lang('menu.Messages')</span></a>
 </li>
-

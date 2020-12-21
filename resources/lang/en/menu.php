@@ -1,12 +1,16 @@
 <?php
 
 return [
-    'Stores'=> 'Stores',
-    'Meet Types'=> 'Meet Types',
-    'Complaints'=> 'Complaints',
-    'App Settings'=> 'App Settings',
+
     'Users'=> 'Users',
-    'User Stores'=> 'User Stores',
+    'Products'=> 'Products',
+    'Types'=> 'Types',
+    'Addresses'=> 'Addresses',
+    'Orders'=> 'Orders',
+    'Categories'=> 'Categories',
+    'Sliders'=> 'Sliders',
+    'Settings'=> 'Settings',
+    'Messages'=> 'Messages',
     'Add New'=> 'Add New',
     'ASOL TEC'=> 'ASOL TEC',
 ];

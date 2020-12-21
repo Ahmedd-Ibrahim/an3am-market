@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Basket;
+use App\Models\Product;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 

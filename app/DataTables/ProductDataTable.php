@@ -18,7 +18,13 @@ class ProductDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'products.datatables_actions');
+        return $dataTable->addColumn('action', 'products.datatables_actions')
+            ->editColumn('user_id',function ($product){
+            return $product->User->name;
+        })
+            ->editColumn('type_id',function ($product){
+                return $product->Type->name;
+            });
     }
 
     /**
@@ -29,6 +35,7 @@ class ProductDataTable extends DataTable
      */
     public function query(Product $model)
     {
+
         return $model->newQuery();
     }
 
@@ -72,8 +79,8 @@ class ProductDataTable extends DataTable
             'feature',
             'stock',
             'regular_price',
-            'user_id',
-            'type_id'
+            'user_id' => ['title'=>'user name'],
+            'type_id' => ['title'=>'type']
         ];
     }
 

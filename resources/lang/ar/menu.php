@@ -1,12 +1,15 @@
 <?php
 
 return [
-    'Stores'=> 'الملاحم',
-    'Meet Types'=> 'انواع اللحوم',
-    'Complaints'=> 'الشكاوي والاقترحات',
-    'App Settings'=> 'اعدادات التطبيق',
     'Users'=> 'الاعضاء',
-    'User Stores'=> 'ملاحم الاعضاء',
+    'Products'=> 'المنتجات',
+    'Types'=> 'النوع',
+    'Addresses'=> 'العناوين',
+    'Orders'=> 'الطلبات',
+    'Categories'=> 'الفئات',
+    'Sliders'=> 'الاسلايدر',
+    'Settings'=> 'الاعدادات',
+    'Messages'=> 'الرسائل',
     'Add New'=> 'اضافه جديد',
     'ASOL TEC'=> 'اصول تك',
 ];

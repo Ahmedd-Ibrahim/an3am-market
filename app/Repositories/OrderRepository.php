@@ -30,6 +30,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
  * */
 class OrderRepository extends BaseRepository
 {
+
     /**
      * @var array
      */
@@ -81,6 +82,13 @@ class OrderRepository extends BaseRepository
         return Order::class;
     }
 
+    public function find($id, $columns = ['*'])
+    {
+//        $query = $this->model->newQuery();
+
+        return Order::findOrFail($id);
+    }
+
     public function create($input)
     {
 
@@ -124,14 +132,14 @@ class OrderRepository extends BaseRepository
 
         }
 
-        return 'You need to login ';
+        $query = $this->allQuery($search, $skip, $limit);
+
+        return $query->get($columns);
     } // End of all
 
     public function history()
     {
-
         if(auth()->guard('api')->user())
-
         {
             $user = JWTAuth::parseToken()->authenticate();
 

@@ -18,7 +18,10 @@ class AddressDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'addresses.datatables_actions');
+        return $dataTable->addColumn('action', 'addresses.datatables_actions')
+            ->editColumn('user_id',function ($address){
+                return $address->User->name;
+            });
     }
 
     /**
@@ -68,7 +71,7 @@ class AddressDataTable extends DataTable
             'id',
             'lat',
             'lang',
-            'user_id',
+            'user_id' => ['title' => 'User Name'],
             'street',
             'governorate',
             'city',

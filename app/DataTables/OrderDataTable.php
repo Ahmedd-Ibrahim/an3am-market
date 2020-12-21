@@ -18,7 +18,10 @@ class OrderDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'orders.datatables_actions');
+        return $dataTable->addColumn('action', 'orders.datatables_actions')
+            ->editColumn('user_id',function ($order){
+                return $order->User->name;
+            });
     }
 
     /**
@@ -72,7 +75,7 @@ class OrderDataTable extends DataTable
             'process',
             'delivery_date',
             'address_id',
-            'user_id'
+            'user_id' => ['title' => 'User Name']
         ];
     }
 

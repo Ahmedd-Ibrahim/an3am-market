@@ -2,7 +2,9 @@
 
 namespace App\DataTables;
 
+use App\Models\Order;
 use App\Models\ProductOrder;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
@@ -18,7 +20,12 @@ class ProductOrderDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'product_orders.datatables_actions');
+        return $dataTable->addColumn('action', 'product_orders.datatables_actions')
+            ->editColumn('count',function ($order){
+
+                return DB::table('product_order')->where('order_id',$order->order_id)->where('product_id',$order->product_id)->count();
+            })
+            ;
     }
 
     /**
