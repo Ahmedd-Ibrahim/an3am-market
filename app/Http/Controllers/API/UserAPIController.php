@@ -214,15 +214,7 @@ class UserAPIController extends AppBaseController
         {
             $random = rand(1000,9999); // random code also send it to mail
             $user->update(['verified_code'=> $random]);
-
-            /* send code to email*/
-//            $to_name = 'Ahmed';
-//            $to_email = 'a9a19bc1b1-df74a6@inbox.mailtrap.io';
-//            $data = array($random);
-//            Mail::send( 'vendor.mail.html.test',$data, function($message) use ($to_name, $to_email) {
-//            $message->to($to_email, $to_name)->subject('test');
-//                $message->from('FROM_EMAIL_ADDRESS','Artisans Web');
-//             });
+            $this->SendCodeToMail($random,'asol@asol','hello@hello');
 
             /* / send code to email*/
 
@@ -316,5 +308,16 @@ class UserAPIController extends AppBaseController
 
     } // End of update password
 
+
+    protected function SendCodeToMail($code,$from,$to)
+    {
+        $data = array('code'=>$code);
+        Mail::send(['html'=>'vendor.mail.html.mail'], $data, function($message) use ($to, $from) {
+            $message->to($to, 'Tutorials Point')->subject
+            ('Password verified code Asol Tec');
+            $message->from($from,'Virat Gandhi');
+        });
+
+    }
 
 }

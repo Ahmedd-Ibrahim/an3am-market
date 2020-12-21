@@ -55,23 +55,6 @@ Route::get('test',function (){
         Route::resource('settings', 'SettingsController');
 
 
-        Route::get('test',function (){
-
-            // get products id from orders & group it by product id
-
-            $productId_count = DB::select('SELECT  product_id , COUNT(*) AS counter FROM  product_order  GROUP BY product_id ORDER BY counter desc  limit 1 ');
-
-            $products_id =  [];
-
-             foreach ($productId_count as $ids)
-             {
-                 $products_id[] = $ids->product_id;
-             }
-
-             $products = \App\Models\Product::whereIn('id',$products_id)->get();
-             return count($products);
-        });
-
     }); // End of Auth
 
 
